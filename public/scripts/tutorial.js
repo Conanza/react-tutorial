@@ -16,6 +16,21 @@ var CommentBox = React.createClass({
     });
   },
 
+  handleCommentSubmit: function(comment) {
+    $.ajax({
+      url: this.props.url,
+      dataType: "json",
+      type: "POST",
+      data: comment,
+      success: function (data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function (xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
+
   getInitialState: function() {
     return {data: []};
   },
@@ -29,9 +44,10 @@ var CommentBox = React.createClass({
     return (
       // JSX
       <div className="commentBox">
+        <h1>Post Comment</h1>
+        <CommentForm onCommentSubmit={this.handleCommentSubmit} />
         <h1>Comments</h1>
         <CommentList data={this.state.data} />
-        <CommentForm />
       </div>
 
       // same as:
@@ -73,7 +89,7 @@ var CommentForm = React.createClass({
       return;
     }
 
-    // TODO: send request to the server
+    this.props.onCommentSubmit({author: author, text: text});
     React.findDOMNode(this.refs.author).value = "";
     React.findDOMNode(this.refs.text).value = "";
     return;
