@@ -1,0 +1,21 @@
+[
+  {
+    "author": "conan",
+    "text": "this is one comment"
+  },
+
+  {
+    "author": "annie",
+    "text": "this is *another* comment"
+  },
+
+  {
+    "author": "optimus",
+    "text": "i'm a robot"
+  },
+
+  {
+    "author": "jarvis",
+    "text": "i'm smart"
+  }
+]
